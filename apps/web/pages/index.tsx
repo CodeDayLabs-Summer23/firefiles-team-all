@@ -96,9 +96,9 @@ const Dashboard = () => {
             ]}
             gap={[2, 6, 6]}
           >
-						<Drives optionProps={optionProps} driveRole={"ADMIN"} />
-            <Drives optionProps={optionProps} driveRole={"EDITOR"} />
-            <Drives optionProps={optionProps} driveRole={"VIEWER"} />
+            <Drives optionProps={optionProps} driveRole="ADMIN" />
+            <Drives optionProps={optionProps} driveRole="EDITOR" />
+            <Drives optionProps={optionProps} driveRole="VIEWER" />
           </Grid>
         </Box>
       </Flex>

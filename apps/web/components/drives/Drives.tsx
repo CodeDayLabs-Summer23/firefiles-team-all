@@ -26,6 +26,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
   const { data, isValidating, mutate } = useSWR<Drive[]>(
     `/api/drive?role=${driveRole}&isPending=false`,
   );
+  const makeOnClickHandler = (id: string) => () => router.push(`/drives/${id}`);
 
   return (
     <>
@@ -51,7 +52,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
             transition="ease-in-out 0.1s"
             className="hoverAnim"
           >
-            <Box flex={1} onClick={() => router.push(`/drives/${drive.id}`)} w="full" mt="2">
+            <Box flex={1} onClick={makeOnClickHandler(drive.id)} w="full" mt="2">
               <Image
                 src={PROVIDERS.filter((p) => p.id === drive.type)[0].logo}
                 maxW="90px"
