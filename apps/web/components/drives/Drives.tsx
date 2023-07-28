@@ -70,9 +70,8 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
                 top="0"
                 right="2"
                 bg="ghost"
-                color="black"
+                color="ghost"
                 p="2"
-                borderRadius="md"
                 fontWeight="bold"
               >
                 {driveRole === Role.CREATOR
