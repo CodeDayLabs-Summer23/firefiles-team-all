@@ -32,6 +32,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
     <>
       {!data && isValidating ? (
         <>
+          //placeholder for content that is being loaded asynchronously.
           <Skeleton h="140px" w="full" borderRadius="lg" />
           <Skeleton h="140px" w="full" borderRadius="lg" />
           <Skeleton h="140px" w="full" borderRadius="lg" />
@@ -52,12 +53,38 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
             transition="ease-in-out 0.1s"
             className="hoverAnim"
           >
-            <Box flex={1} onClick={makeOnClickHandler(drive.id)} w="full" mt="2">
+            <Box
+              flex={1}
+              onClick={makeOnClickHandler(drive.id)}
+              w="full"
+              mt="2"
+              position="relative"
+            >
               <Image
                 src={PROVIDERS.filter((p) => p.id === drive.type)[0].logo}
                 maxW="90px"
                 m="auto"
               />
+              <Box
+                position="absolute"
+                top="0"
+                right="2"
+                bg="ghost"
+                color="black"
+                p="2"
+                borderRadius="md"
+                fontWeight="bold"
+              >
+                {driveRole === Role.CREATOR
+                  ? "C"
+                  : driveRole === Role.ADMIN
+                  ? "A"
+                  : driveRole === Role.EDITOR
+                  ? "E"
+                  : driveRole === Role.VIEWER
+                  ? "V"
+                  : `${driveRole}`}
+              </Box>
             </Box>
             <Flex p="2" w="full" justify="space-between" alignItems="center">
               <Text
