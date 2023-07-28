@@ -79,7 +79,8 @@ const FileGrid: React.FC<Props> = (props) => {
                   <FileDownload />
                   <Text ml="2">Download</Text>
                 </Flex>
-                {role === Role.VIEWER || (
+                {/*If I am Creator, True||x=True, complier will not run the Flex*/}
+                {role !== Role.VIEWER || (
                   <Flex {...optionProps} onClick={() => props.setIsOpen(true)}>
                     <FileMinus />
                     <Text ml="2">Delete</Text>
