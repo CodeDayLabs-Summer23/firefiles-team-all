@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, Skeleton } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Skeleton, Tooltip } from "@chakra-ui/react";
 import OptionsPopover from "@components/popups/OptionsPopover";
 import { Drive } from "@prisma/client";
 import { PROVIDERS } from "@util/globals";
@@ -9,6 +9,29 @@ import React from "react";
 import useSWR from "swr";
 import { X } from "tabler-icons-react";
 import { Role } from "@prisma/client";
+import drive from "pages/api/drive";
+
+const tooltips: Record<Role, string> = {
+  CREATOR: "You are the creator of this drive",
+  ADMIN: "You are an administrator of this drive",
+  VIEWER: "You are a viewer of this drive",
+  EDITOR: "You are an editor of this drive",
+};
+
+const abbreviation: Record<Role, string> = {
+  CREATOR: "C",
+  ADMIN: "A",
+  VIEWER: "E",
+  EDITOR: "V",
+};
+
+const ShowRole: React.FC<{ driveRole: Role }> = ({ driveRole }) => (
+  <Tooltip label={tooltips[driveRole]}>
+    <Box position="absolute" top="0" right="2" bg="ghost" color="ghost" p="2" fontWeight="bold">
+      {abbreviation[driveRole]}
+    </Box>
+  </Tooltip>
+);
 
 interface Props {
   optionProps: {
@@ -53,6 +76,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
             transition="ease-in-out 0.1s"
             className="hoverAnim"
           >
+            {/*/////*/}
             <Box
               flex={1}
               onClick={makeOnClickHandler(drive.id)}
@@ -65,25 +89,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
                 maxW="90px"
                 m="auto"
               />
-              <Box
-                position="absolute"
-                top="0"
-                right="2"
-                bg="ghost"
-                color="ghost"
-                p="2"
-                fontWeight="bold"
-              >
-                {driveRole === Role.CREATOR
-                  ? "C"
-                  : driveRole === Role.ADMIN
-                  ? "A"
-                  : driveRole === Role.EDITOR
-                  ? "E"
-                  : driveRole === Role.VIEWER
-                  ? "V"
-                  : `${driveRole}`}
-              </Box>
+              <ShowRole driveRole={driveRole} />
             </Box>
             <Flex p="2" w="full" justify="space-between" alignItems="center">
               <Text
