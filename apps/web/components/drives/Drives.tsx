@@ -76,7 +76,6 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
             transition="ease-in-out 0.1s"
             className="hoverAnim"
           >
-            {/*/////*/}
             <Box
               flex={1}
               onClick={makeOnClickHandler(drive.id)}
@@ -109,7 +108,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
                     {...optionProps}
                     onClick={async (e) => {
                       e.stopPropagation();
-                      await deleteDrive(Provider[drive.type], drive.id);
+                      await deleteDrive(Provider[drive.type], drive.id, driveRole);
                       mutate(data.filter((b) => b.id !== drive.id));
                     }}
                   >
