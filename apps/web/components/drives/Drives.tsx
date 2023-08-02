@@ -55,7 +55,7 @@ const Drives: React.FC<Props> = ({ optionProps, driveRole }) => {
     <>
       {!data && isValidating ? (
         <>
-          //placeholder for content that is being loaded asynchronously.
+          {/*placeholder for content that is being loaded asynchronously.*/}
           <Skeleton h="140px" w="full" borderRadius="lg" />
           <Skeleton h="140px" w="full" borderRadius="lg" />
           <Skeleton h="140px" w="full" borderRadius="lg" />
