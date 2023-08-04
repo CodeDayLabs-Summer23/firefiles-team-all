@@ -23,10 +23,11 @@ export default withIronSessionApiRoute(async (req: NextApiRequest, res: NextApiR
       // CREATE
     } else if (req.method === "POST") {
       const { id, userId, isPending, role } = req.body;
+      const driveIdValue = id.driveId;
       if (!id || !userId || isPending === null || role === null)
         return res.status(400).json({ error: "Invalid request." });
       await prisma.bucketsOnUsers.create({
-        data: { userId: userId, bucketId: id, isPending, role },
+        data: { userId: userId, bucketId: driveIdValue, isPending, role },
       });
       return res.status(200).json("ok");
       // DELETE
